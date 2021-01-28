@@ -11,159 +11,166 @@
             type="com.hani.weatherdemo.presentation.WeatherViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.MainActivity"
-        tools:viewBindingIgnore="true"
-        android:id="@+id/main">
+        android:fillViewport="true">
 
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_screen_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:fontFamily="@font/roboto_regular"
-            android:gravity="center_horizontal|top"
-            android:text="@string/weather"
-            android:textAppearance="@style/text_screen_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/divider_1"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="11dp"
-            android:background="@color/gray_4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_screen_title" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_current_location_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="37dp"
-            android:text="@string/gothenburg"
-            android:textAppearance="@style/text_location_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider_1" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_current_location_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="center_horizontal|top"
-            android:textAppearance="@style/text_location_info"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_current_location_name"
-            tools:status="@{viewmodel.weatherInfoLiveData.component1().component5()}" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/tv_current_location_state_pic"
-            android:layout_width="42dp"
-            android:layout_height="46dp"
-            android:layout_marginTop="21dp"
-            android:src="@android:drawable/ic_menu_close_clear_cancel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_current_location_info"
-            tools:pic_name="@{viewmodel.weatherInfoLiveData.component1().component5()}" />
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_current_location_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textAppearance="@style/text_location_temp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_current_location_state_pic"
-            tools:maxTemp="@{viewmodel.weatherInfoLiveData.component1().component2()}"
-            tools:minTemp="@{viewmodel.weatherInfoLiveData.component1().component3()}" />
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_current_location_speed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7.5dp"
-            android:textAppearance="@style/text_location_speed"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_current_location_temp"
-            tools:speed="@{viewmodel.weatherInfoLiveData.component1().component4()}" />
-
-
-        <View
-            android:id="@+id/divider_2"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="29.5dp"
-            android:background="@color/gray_6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_current_location_speed" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rc_days"
-            items="@{viewmodel.weatherInfoLiveData.component2()}"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider_2"
-            tools:listitem="@layout/rc_item_weather_day_info" />
+            tools:context=".presentation.MainActivity"
+            tools:viewBindingIgnore="true">
 
 
-        <ProgressBar
-            android:id="@+id/pb_loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_screen_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center_horizontal|top"
+                android:text="@string/weather"
+                android:textAppearance="@style/text_screen_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/loading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pb_loading" />
+            <View
+                android:id="@+id/divider_1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="11dp"
+                android:background="@color/gray_4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_screen_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_current_location_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="37dp"
+                android:text="@string/gothenburg"
+                android:textAppearance="@style/text_location_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_current_location_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_horizontal|top"
+                android:textAppearance="@style/text_location_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_current_location_name"
+                tools:status="@{viewmodel.weatherInfoLiveData.component1().component5()}" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/tv_current_location_state_pic"
+                android:layout_width="42dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="21dp"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_current_location_info"
+                tools:pic_name="@{viewmodel.weatherInfoLiveData.component1().component5()}" />
 
 
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/main_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="tv_current_location_name,
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_current_location_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textAppearance="@style/text_location_temp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_current_location_state_pic"
+                tools:maxTemp="@{viewmodel.weatherInfoLiveData.component1().component2()}"
+                tools:minTemp="@{viewmodel.weatherInfoLiveData.component1().component3()}" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_current_location_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7.5dp"
+                android:textAppearance="@style/text_location_speed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_current_location_temp"
+                tools:speed="@{viewmodel.weatherInfoLiveData.component1().component4()}" />
+
+
+            <View
+                android:id="@+id/divider_2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="29.5dp"
+                android:background="@color/gray_6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_current_location_speed" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rc_days"
+                items="@{viewmodel.weatherInfoLiveData.component2()}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_2"
+                tools:listitem="@layout/rc_item_weather_day_info" />
+
+
+            <ProgressBar
+                android:id="@+id/pb_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/loading"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pb_loading" />
+
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/main_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="tv_current_location_name,
                  tv_current_location_info,tv_current_location_state_pic ,
                  tv_current_location_temp,tv_current_location_speed ,divider_2, rc_days" />
 
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/loading_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            app:constraint_referenced_ids="pb_loading , tv_status" />
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/loading_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="pb_loading , tv_status" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </layout>
