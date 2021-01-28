@@ -23,7 +23,7 @@ data class TimeSeries(val time: String, val data: TimeSeriesData)
 
 data class TimeSeriesData(
         val instant: Instant,
-        val next_12_hours: TimeSeriesSummary,
+        val next_12_hours: TimeSeriesSummary?,
         val next_1_hours: TimeSeriesSummary,
         val next_6_hours: TimeSeriesSummary
 

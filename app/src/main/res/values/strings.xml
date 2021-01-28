@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">WeatherDemo</string>
     <string name="weather">Weather</string>
-    <string name="m_s">%sm/s</string>
-    <string name="_s_h_c">%s-%s °C</string>
+    <string name="m_s">%dm/s</string>
+    <string name="_s_h_c">%d/%d °C</string>
+    <string name="loading">Loading...</string>
+    <string name="status">%s \n %s</string>
 </resources>

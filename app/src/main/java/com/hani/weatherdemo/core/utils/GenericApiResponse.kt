@@ -2,6 +2,7 @@ package com.hani.weatherdemo.core.utils
 
 import android.util.Log
 import retrofit2.Response
+import java.net.UnknownHostException
 
 /**
  * Copied from Architecture components google sample:
@@ -15,6 +16,9 @@ sealed class GenericApiResponse<T> {
 
 
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
+            if (error is UnknownHostException)
+                return ApiErrorResponse("No Connection, Please check your internet connection and try again")
+
             return ApiErrorResponse(error.message ?: "unknown error")
         }
 
@@ -25,19 +29,16 @@ sealed class GenericApiResponse<T> {
             Log.d(TAG, "GenericApiResponse: headers: ${response.headers()}")
             Log.d(TAG, "GenericApiResponse: message: ${response.message()}")
 
-            if(response.isSuccessful){
+            if (response.isSuccessful) {
                 val body = response.body()
                 if (body == null || response.code() == 204) {
                     return ApiEmptyResponse()
-                }
-                else if(response.code() == 401){
+                } else if (response.code() == 401) {
                     return ApiErrorResponse("401 Unauthorized. Token may be invalid.")
-                }
-                else {
+                } else {
                     return ApiSuccessResponse(body = body)
                 }
-            }
-            else{
+            } else {
                 val msg = response.errorBody()?.string()
                 val errorMsg = if (msg.isNullOrEmpty()) {
                     response.message()

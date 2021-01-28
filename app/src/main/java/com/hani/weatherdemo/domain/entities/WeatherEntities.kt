@@ -11,5 +11,5 @@ data class DayForecastModel(
      val maxTemp: Float,
      val minTemp: Float,
      val speed: Float,
-     val symbol_code: String
+     val symbol_code: String?
 )

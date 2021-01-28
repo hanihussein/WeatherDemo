@@ -5,9 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <!--        <variable-->
-        <!--            name="viewmodel"-->
-        <!--            type="com.myapp.data.ViewModel" />-->
+
+        <variable
+            name="viewmodel"
+            type="com.hani.weatherdemo.presentation.WeatherViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,13 +55,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Tuesday 09:00 \n
-Partly cloudy with rain"
-            android:textAppearance="@style/text_location_info"
             android:gravity="center_horizontal|top"
+            android:textAppearance="@style/text_location_info"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_current_location_name" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_current_location_name"
+            tools:status="@{viewmodel.weatherInfoLiveData.component1().component5()}" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/tv_current_location_state_pic"
@@ -82,7 +82,9 @@ Partly cloudy with rain"
             android:textAppearance="@style/text_location_temp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_current_location_state_pic" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_current_location_state_pic"
+            tools:maxTemp="@{viewmodel.weatherInfoLiveData.component1().component2()}"
+            tools:minTemp="@{viewmodel.weatherInfoLiveData.component1().component3()}" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -94,6 +96,7 @@ Partly cloudy with rain"
             android:textAppearance="@style/text_location_speed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            tools:speed="@{viewmodel.weatherInfoLiveData.component1().component4()}"
             app:layout_constraintTop_toBottomOf="@+id/tv_current_location_temp" />
 
 
@@ -109,16 +112,54 @@ Partly cloudy with rain"
 
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_days"
+            items="@{viewmodel.weatherInfoLiveData.component2()}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="horizontal"
-            android:layout_marginTop="30dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/rc_item_weather_day_info"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider_2" />
+            app:layout_constraintTop_toBottomOf="@+id/divider_2"
+            tools:listitem="@layout/rc_item_weather_day_info" />
+
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/loading"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pb_loading" />
+
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/main_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="tv_current_location_name,
+                 tv_current_location_info,tv_current_location_state_pic ,
+                 tv_current_location_temp,tv_current_location_speed ,divider_2, rc_days" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/loading_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="pb_loading , tv_status" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

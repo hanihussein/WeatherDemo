@@ -16,13 +16,9 @@ abstract class NetworkBoundResource<ResponseObject, ViewStateType> {
             val apiResponse = createCall()
 
             withContext(Dispatchers.Main) {
-
                 result.addSource(apiResponse) { response ->
-
                     result.removeSource(apiResponse)
-
                     handleNetworkCall(response)
-
                 }
             }
         }
