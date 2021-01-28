@@ -39,6 +39,20 @@ object DateUtil {
             val date: Date? = originalFormat.parse(date)
             formattedDate = targetFormat.format(date) // 20120821
 
+        } catch (e: Exception) {
+            throw Exception(e.message)
+        }
+        return formattedDate
+    }
+
+
+    fun formatDate(date: Date): String {
+
+        var formattedDate: String? = null
+        try {
+            val format: DateFormat = SimpleDateFormat(DATE_EEEEHHMM_FORMAT, Locale.ENGLISH)
+            formattedDate = format.format(date)
+
         } catch (e: ParseException) {
             throw Exception(e.message)
         }

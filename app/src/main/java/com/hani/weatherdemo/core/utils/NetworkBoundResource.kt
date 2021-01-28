@@ -2,7 +2,10 @@ package com.hani.weatherdemo.core.utils
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 abstract class NetworkBoundResource<ResponseObject, ViewStateType> {
 
@@ -13,12 +16,15 @@ abstract class NetworkBoundResource<ResponseObject, ViewStateType> {
 
         GlobalScope.launch(Dispatchers.IO) {
 
+            EspressoIdlingResource.increment()
             val apiResponse = createCall()
 
             withContext(Dispatchers.Main) {
                 result.addSource(apiResponse) { response ->
                     result.removeSource(apiResponse)
                     handleNetworkCall(response)
+
+                    EspressoIdlingResource.decrement()
                 }
             }
         }

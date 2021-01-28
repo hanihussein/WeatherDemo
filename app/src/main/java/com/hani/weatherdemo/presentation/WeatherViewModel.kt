@@ -1,6 +1,5 @@
 package com.hani.weatherdemo.presentation
 
-import android.location.Geocoder
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations

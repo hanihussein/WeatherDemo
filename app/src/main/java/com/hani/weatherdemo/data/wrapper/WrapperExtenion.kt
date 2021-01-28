@@ -5,7 +5,6 @@ import com.hani.weatherdemo.data.remote.LocationWeatherResponse
 import com.hani.weatherdemo.data.remote.TimeSeries
 import com.hani.weatherdemo.domain.entities.DayForecastModel
 import com.hani.weatherdemo.domain.entities.WeatherForecastModel
-import okhttp3.internal.toImmutableMap
 
 
 fun LocationWeatherResponse.toWeatherForecastModel(): WeatherForecastModel {

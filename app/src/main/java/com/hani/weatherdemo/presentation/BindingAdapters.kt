@@ -16,10 +16,12 @@
 
 package com.hani.weatherdemo.presentation
 
-import androidx.databinding.BindingAdapter
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hani.weatherdemo.R
+import com.hani.weatherdemo.core.snakeToUpperCamelCase
 import com.hani.weatherdemo.core.utils.DateUtil
 import com.hani.weatherdemo.domain.entities.DayForecastModel
 
@@ -36,12 +38,12 @@ object BindingAdapters {
     @BindingAdapter("status")
     @JvmStatic
     fun setWeatherStatus(view: AppCompatTextView, status: String?) {
-        status?.split("_")?.let {
+        status?.let {
             view.setText(
                 view.resources.getString(
                     R.string.status,
                     DateUtil.getCurrentDate(),
-                    it[0]
+                    it.snakeToUpperCamelCase()
                 )
             )
         }
@@ -57,6 +59,15 @@ object BindingAdapters {
     @JvmStatic
     fun setSpeed(view: AppCompatTextView, speed: Float) {
         view.setText(view.resources.getString(R.string.m_s, speed.toInt()))
+    }
+
+    @BindingAdapter("pic_name")
+    @JvmStatic
+    fun setImage(view: AppCompatImageView, pic_name: String?) {
+        pic_name?.let {
+            val resID: Int = view.context.resources.getIdentifier( pic_name,  "drawable", view.context.getPackageName())
+            view.setImageResource(resID)
+        }
     }
 
 }

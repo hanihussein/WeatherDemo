@@ -2,15 +2,11 @@ package com.hani.weatherdemo.presentation
 
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.hani.weatherdemo.R
 import com.hani.weatherdemo.core.utils.DateUtil
+import com.hani.weatherdemo.databinding.RcItemWeatherDayInfoBinding
 import com.hani.weatherdemo.domain.entities.DayForecastModel
 
 const val MAX_DAYS_COUNT = 7
@@ -20,9 +16,9 @@ class ForecastAdapter(var daysForeCasting: MutableList<DayForecastModel>) :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflater = LayoutInflater.from(parent.getContext())
-        val contactView: View = inflater.inflate(R.layout.rc_item_weather_day_info, parent, false)
-        return ViewHolder(contactView)
+        val binding =
+            RcItemWeatherDayInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -37,25 +33,26 @@ class ForecastAdapter(var daysForeCasting: MutableList<DayForecastModel>) :
         return count
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+    class ViewHolder(private val binding: RcItemWeatherDayInfoBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(dayForecastModel: DayForecastModel) {
-            itemView.findViewById<AppCompatTextView>(R.id.tv_day_name).text =
+            binding.tvDayName.text =
                 DateUtil.getDayName(dayForecastModel.date)
 
-            itemView.findViewById<AppCompatTextView>(R.id.tv_weather_temp).text =
+            binding.tvWeatherTemp.text =
                 itemView.resources.getString(
                     R.string._s_h_c,
                     dayForecastModel.minTemp.toInt(), dayForecastModel.maxTemp.toInt()
                 )
 
-            itemView.findViewById<AppCompatTextView>(R.id.tv_weather_speed).text =
+            binding.tvWeatherSpeed.text =
                 itemView.resources.getString(
                     R.string.m_s,
                     dayForecastModel.speed.toInt()
                 )
 
+            BindingAdapters.setImage(binding.tvWeatherPic, dayForecastModel.symbol_code)
         }
     }
 
